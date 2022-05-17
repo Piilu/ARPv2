@@ -1,0 +1,21 @@
+.object-card{
+    text-align: center;
+    padding: 1.2em;
+    background-color: whitesmoke;
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+}
+.note-card{
+    background-color: whitesmoke;
+
+    padding: 1.2em;
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+}
+.card-text{
+    font-size: 1em;
+}
+.card-titles{
+    font-size: 1em;
+    font-weight: bold;
+}

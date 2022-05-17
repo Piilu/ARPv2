@@ -13,9 +13,10 @@ function NavBar(props) {
                         <Nav.Link href="/">Login</Nav.Link>
                         <Nav.Link href="/register">Register</Nav.Link>
                         <NavDropdown title="Development" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/development/testing">Testing</NavDropdown.Item>
+                            <NavDropdown.Item href="/paevik">Päevik</NavDropdown.Item>
+                            <NavDropdown.Item href="/home">ARP</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            <NavDropdown.Item href="/development/testing">Testing</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

@@ -6,7 +6,7 @@ import "../../style/fonts.css"
 
 function Register(props) {
     return (
-        <Container fluid={true} className='center'>
+        <Container  className='center'>
         <div className='container-custom'>
 
             <Form>

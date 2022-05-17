@@ -1,3 +1,15 @@
 .form-title{
     text-align: center;
 }
+.maker-title{
+    font-size: 1.5em;
+}
+.page-title{
+    font-size: 1.8em;
+    font-weight: 400;
+
+}
+.object-info-titles{
+    font-size: 1em;
+    font-weight: bold;
+}
