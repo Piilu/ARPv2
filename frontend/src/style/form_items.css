@@ -1,0 +1,10 @@
+.container-custom{
+    background-color: whitesmoke;
+    box-shadow: 6px 10px 6px rgba(85, 85, 85, 0.384);
+    padding: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 20%;
+    border-radius:0.5em; 
+}
+
