@@ -1,10 +1,23 @@
-import React from 'react';
+import React,{useState}from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import "../style/cards.css"
+import ObjectModal from './ModalLayout/ObjectModal';
+import Modal from "./Modal";
+
 function ObjectCard(props) {
     const{aadress,susteem,item} = props
+    const [showModal, setShowModal] = useState(false)
+    const [show, setShow] = useState("none")
+    const openModal = ()=>{
+        console.log("testing")
+        setShowModal(true);
+    }
+    const handleClose = () => {
+        setShowModal(false)
+    }
     return (
         <Container id={item.id}  className='object-card '>
+            <Modal body={<ObjectModal item={item}/>} show={showModal} handleClose={handleClose}/>
             <Row className='flex-nowrap card-titles'>
                 <Col>Aadress</Col>
                 <Col>Süsteem</Col>
@@ -15,7 +28,7 @@ function ObjectCard(props) {
             </Row>
             <Row style={{textAlign:"right"}} className='mt-4'>
                 <Col>
-                    <Button onClick={()=>console.log(item)} size='sm' variant='primary'>Vaata lähemalt</Button>
+                    <Button onClick={openModal} size='sm' variant='primary'>Vaata lähemalt</Button>
                 </Col>
             </Row>
 

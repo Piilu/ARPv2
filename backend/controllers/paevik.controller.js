@@ -3,8 +3,8 @@ const Paevik = db.paeviks;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.Tegija && !req.body.Liik && !req.body.System && !req.body.Sisu && !req.body.FileURL && !req.body.ObjektID) {
-        res.status.send({
+    if (!req.body.Tegija || !req.body.Liik || !req.body.System || !req.body.Sisu || !req.body.FileURL || !req.body.ObjektID) {
+        res.status(400).send({
             message: "Content can not be empty"
         })
         return;

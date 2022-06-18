@@ -31,6 +31,15 @@ function AllFunc(props) {
     const handleClose = () => {
         setShowModal(false)
     }
+    const value = [
+        {
+           createdAt:"10:00",
+           Liik:"ATS",
+           System:"Lahe",
+           Tegija:"Rainer",
+           Sisu:"Lahe sisu", 
+        }
+    ]
     return (
         <Container className='mt-2'>
             <Modal body={<ObjectModal />} show={showModal} handleClose={handleClose} />
@@ -65,8 +74,8 @@ function AllFunc(props) {
 
                     </Col>
                     <Col>
-                        <NoteCard />
-                        <NoteCard />
+                        <NoteCard key={1} item={value}/>
+                        <NoteCard key={2} item={value}/>
 
                     </Col>
                 </Row>

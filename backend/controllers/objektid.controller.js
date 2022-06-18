@@ -3,7 +3,7 @@ const Objektid = db.objektids
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.Klient && !req.body.Aadress && !req.body.Kontakt && !req.body.Email && !req.body.Telefon && !req.body.System) {
+    if (!req.body.Klient || !req.body.Aadress || !req.body.Kontakt || !req.body.Email || !req.body.Telefon || !req.body.System) {
         res.status(400).send({
             message: "Content can not be empty!"
         })

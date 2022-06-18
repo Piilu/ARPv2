@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
 import { Container, Col, Row, Button } from 'react-bootstrap';
 import MakeNote from '../../components/MakeNote';
 import NoteCard from '../../components/NoteCard';
 import "../../style/fonts.css"
 function Paevik(props) {
     const [makeNote, setNote] = useState("none");
+    const [notes, setNotes] = useState([])
     const openNoteSec = () => {
         if (makeNote === "none") {
             setNote("block")
@@ -12,6 +14,22 @@ function Paevik(props) {
         else {
             setNote("none")
         }
+    }
+
+    useEffect(()=>{
+        loadAllNotes();
+    },[notes.length])
+    const loadAllNotes =async ()=>{
+        await axios.get('http://localhost:3001/api/paeviks').then(res=>{
+            if(res.status===200){
+                setNotes(res.data)
+            }
+            else{
+                alert("Midagi läks viltu")
+            }
+        }).catch(err=>{
+            alert("Midagi läks katki")
+        })
     }
     return (
         <Container>
@@ -21,7 +39,7 @@ function Paevik(props) {
                         <Button onClick={openNoteSec} variant='success'>Sissekande lisamine</Button>
                     </Col>
                 </Row>
-                <Row className='mt-2 '><MakeNote show={makeNote} /></Row>
+                <Row className='mt-2 '><MakeNote notes={notes} setNotes={setNotes} show={makeNote} /></Row>
             </Col>
             <Col>
                 <Row>
@@ -51,18 +69,10 @@ function Paevik(props) {
                     <h2 className='page-title'>Sissekanded:</h2>
                 </Row>
                 <Row className='mt-3'>
-
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-                    <NoteCard />
-
-                    <NoteCard />
-
+                    {notes.length ? notes.reverse().map(value => {
+                        console.log(value)
+                        return (<NoteCard key={value.id} item={value} />)
+                    }) : <h2 className='no-items'>SISSEKANDED PUUDUVAD</h2>}
 
                 </Row>
             </Col>

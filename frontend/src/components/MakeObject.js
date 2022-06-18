@@ -1,41 +1,56 @@
 
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Container, Form, Row, Col, FormGroup, Button, Dropdown, ListGroup, ListGroupItem } from 'react-bootstrap';
 import "../style/fonts.css"
 function MakeObject(props) {
-    const { show,addNewObject,id} = props
-    const [klient, setKlient] = useState("");
-    const [aadress, setAadress] = useState("");
-    const [kontakt, setKontakt] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefon, setTelefon] = useState("");
-    const [susteem, setSusteem] = useState([])
-    const selectSystem = async (e) => {
-        const susteemid = []
+    const { show, allObjects, setAllObjects } = props
+    const [Klient, setKlient] = useState("");
+    const [Aadress, setAadress] = useState("");
+    const [Kontakt, setKontakt] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Telefon, setTelefon] = useState("");
+    const [SystemList, setSystemList] = useState(["Apple", "Banana", "Tea", "Coffee"])
+    const [System, setSystem] = useState([])
+    const handleSelectSystem = (e) => {
+        var updatedList = [...System];
         if (e.target.checked) {
-            susteem.forEach(value => {
-
-                susteemid.push(value)
-            })
-            susteemid.push(e.target.id)
-            setSusteem(susteemid)
-
+            updatedList = [...System, e.target.value];
+        } else {
+            updatedList.splice(System.indexOf(e.target.value), 1);
         }
-        else {
-            susteem.forEach(value => {
-
-                susteemid.push(value)
-            })
-            susteemid.splice(susteemid.indexOf(e.target.id), 1)
-            setSusteem(susteemid)
-
-        }
-
+        setSystem(updatedList);
+    };
+   
+    const addObject = async () => {
+        const andmed = { Klient, Aadress, Kontakt, Email, Telefon, System: System.join(",") }
+        await axios.post("http://localhost:3001/api/objektids", andmed).then(res => {
+            if (res.status === 200) {
+                alert("Objekt edukalt lisatud");
+                setKlient("");
+                setAadress("");
+                setKontakt("");
+                setEmail("");
+                setTelefon("");
+                setSystem([]);
+                addObjectToList(andmed);
+                console.log(res.data)
+            }
+            else {
+                alert("Objekti ei saanud lisada")
+            }
+        }).catch(err => {
+            alert("Midagi läks valesti")
+        })
     }
-
-    const prepAddObject = () => {
-        const andmed = { klient, aadress, kontakt, email, telefon, susteem,id}
-        addNewObject(andmed)
+    const addObjectToList = (item)=>{
+        const newList =[]
+        allObjects.forEach(value=>{
+            newList.push(value);
+        })
+        newList.push(item)
+        console.log(newList)
+        setAllObjects(newList.reverse());
     }
     return (
         <Container style={{ display: show }}>
@@ -45,30 +60,30 @@ function MakeObject(props) {
                     <Row>
                         <Col style={{ minWidth: "20vh" }}>
                             <Form.Group className='mb-3'>
-                                <Form.Control value={klient} onChange={(e) => setKlient(e.target.value)} type='text' placeholder='Klient*' />
+                                <Form.Control value={Klient} onChange={(e) => setKlient(e.target.value)} type='text' placeholder='Klient*' />
                             </Form.Group>
                         </Col>
 
                         <Col style={{ minWidth: "20vh" }}>
                             <Form.Group className='mb-3'>
-                                <Form.Control value={aadress} onChange={(e) => setAadress(e.target.value)} type='text' placeholder='Aadress*' />
+                                <Form.Control value={Aadress} onChange={(e) => setAadress(e.target.value)} type='text' placeholder='Aadress*' />
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row>
                         <Col style={{ minWidth: "20vh" }}>
                             <Form.Group className='mb-3'>
-                                <Form.Control value={kontakt} onChange={(e) => setKontakt(e.target.value)} type='text' placeholder='Kontakt*' />
+                                <Form.Control value={Kontakt} onChange={(e) => setKontakt(e.target.value)} type='text' placeholder='Kontakt*' />
                             </Form.Group>
                         </Col>
                         <Col style={{ minWidth: "20vh" }}>
                             <Form.Group className='mb-3'>
-                                <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Email*' />
+                                <Form.Control value={Email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='Email*' />
                             </Form.Group>
                         </Col>
 
                         <Form.Group className='mb-3'>
-                            <Form.Control value={telefon} onChange={(e) => setTelefon(e.target.value)} type='text' placeholder='Telefon*' />
+                            <Form.Control value={Telefon} onChange={(e) => setTelefon(e.target.value)} type='text' placeholder='Telefon*' />
                         </Form.Group>
                     </Row>
 
@@ -85,15 +100,20 @@ function MakeObject(props) {
 
                         <ListGroup>
                             <ListGroupItem>
-                                <Form.Check onClick={selectSystem} id="testing1" label={"testing1"} type='checkbox' />
-                                <Form.Check onClick={selectSystem} id="testing2" label={"testing2"} type='checkbox' />
-                                <Form.Check onClick={selectSystem} id="testing3" label={"testing3"} type='checkbox' />
+                                {SystemList ? SystemList.map(data => {
+                                    var id = SystemList.indexOf(data);
+                                        return (
+                                        <Form.Check key={id} label={data} value={data} onChange={handleSelectSystem} type='checkbox' />
+                                    );
+
+                                }):null}
+
                             </ListGroupItem>
 
                         </ListGroup>
                     </FormGroup>
                     <FormGroup className='mb-3'>
-                        <Button onClick={prepAddObject} variant='primary'>Lisa</Button>
+                        <Button onClick={addObject} variant='primary'>Lisa</Button>
                     </FormGroup>
 
 

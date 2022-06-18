@@ -5,27 +5,28 @@ import "../../style/cards.css"
 import "../../style/modals.css"
 
 function ObjectModal(props) {
+    const{item}=props
     return (
         <Container fluid>
             <Modal.Header closeButton>
-                <Modal.Title >Modal heading</Modal.Title>
+                <Modal.Title >Täpsem vaade</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Row>
                     <Col>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Klient: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Klient: </p> {item.Klient}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Aadress: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Aadress: </p> {item.Aadress}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Kontakt: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Kontakt: </p> {item.Kontakt}
                             </Col>
                         </Row>
 
@@ -34,17 +35,17 @@ function ObjectModal(props) {
                     <Col>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Email: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Email: </p> {item.Email}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Telefon: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Telefon: </p> {item.Telefon}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <p style={{ display: "inline" }} className='card-titles'>Süsteem: </p> Lorem
+                                <p style={{ display: "inline" }} className='card-titles'>Süsteem: </p> {item.System}
                             </Col>
                         </Row>
 
@@ -54,7 +55,7 @@ function ObjectModal(props) {
                     <Col>
                         <div className='qr-box'>
                             <QRCode size={70} value={"test"}/>
-                            <Row><a className='link-size' href='#'>Link päeviku</a></Row>
+                            <Row><a className='link-size' href='#'>{window.location.href+"/paevik/"+""}{item.id}</a></Row>
                         </div>
                     </Col>
                 </Row>

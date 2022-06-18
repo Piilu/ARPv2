@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState,useEffect} from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import MakeObject from '../../components/MakeObject';
 import ObjectCard from '../../components/ObjectCard';
+import "../../style/fonts.css"
 
 function Home(props) {
     const [makeObjectSec, setMakeObjectSec] = useState("none")
+
     const openMakeObject = () => {
         if (makeObjectSec === "none") {
             setMakeObjectSec("block")
@@ -13,16 +16,26 @@ function Home(props) {
             setMakeObjectSec("none")
         }
     }
-    const [allObjects, setAllObjects] = useState([
-        {
-            aadress:"Test1",
-            susteem:"sysarp",
-            id:0,
-        }
-    ])
-    const addNewObject=(item) =>{
-        console.log(item)
+    const [allObjects, setAllObjects] = useState([])
+    const getAllObjektid = async()=>{
+        await axios.get("http://localhost:3001/api/objektids").then(res=>{
+            if(res.status==200){
+                setAllObjects(res.data);
+                console.log(res.data)
+                
+            }
+            else{
+                alert("Midagi läks viltu")
+            }
+        }).catch(err=>{
+            alert("Midagi läks KATKI")
+        })
     }
+  
+    useEffect(() => {
+        getAllObjektid();
+    },[allObjects.length]);
+
     return (
         <Container>
             <Row style={{ textAlign: "right" }}>
@@ -31,7 +44,7 @@ function Home(props) {
                 </Col>
             </Row>
             <Row>
-                <MakeObject id={allObjects.length} addNewObject={addNewObject} show={makeObjectSec} />
+                <MakeObject allObjects={allObjects} setAllObjects={setAllObjects} show={makeObjectSec} />
 
             </Row>
             <Row>
@@ -42,11 +55,12 @@ function Home(props) {
             <Row className='mt-3'>
 
                 <Col>
-                {allObjects.length ? allObjects.map(value=>{
-                    return(
-                        <ObjectCard key={value.id} aadress={value.aadress} susteem={value.susteem} item={value} />
+                    {allObjects.length ? allObjects.reverse().map(value => {
+                        console.log("Lisatud objektid ID"+value.id)
+                        return (
+                            <ObjectCard key={value.id} aadress={value.Aadress} susteem={value.System} item={value} />
                         );
-                }):null}
+                    }) : <h2 className='no-items'>OBJEKTE POLE</h2>}
 
 
                 </Col>

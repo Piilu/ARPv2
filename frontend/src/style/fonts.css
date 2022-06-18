@@ -13,3 +13,9 @@
     font-size: 1em;
     font-weight: bold;
 }
+.no-items{
+    text-align: center;
+    opacity: 0.5;
+    color: rgba(194, 194, 194, 0.63);
+    margin-top: 10%;
+}
