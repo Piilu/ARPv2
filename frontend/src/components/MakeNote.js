@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { Container, Form, Row, Col, FormGroup, Button } from 'react-bootstrap';
 import "../style/fonts.css"
 function MakeNote(props) {
-    const { show, setNotes, notes } = props
+    const { show, setNotes, notes,id } = props
     const [Tegija, setTegija] = useState("");
     const [Liik, setLiik] = useState("");
     const [System, setSystem] = useState("");
     const [File, setFile] = useState("");
     const [Sisu, setSisu] = useState("");
     const addNote = async () => {
-        const andmed = { Tegija, Liik, System, FileURL: File, Sisu, ObjektID: 1 }
+        const andmed = { Tegija, Liik, System, FileURL: File, Sisu, ObjektID: id }
         await axios.post("http://localhost:3001/api/paeviks", andmed).then(res => {
             if(res.status===200){
                 alert("Uus teade edukalt tehtud")

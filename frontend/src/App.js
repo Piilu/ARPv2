@@ -39,7 +39,6 @@ function App() {
   const getUser = async()=>{
     await axios.get("http://localhost:3001/api/test/user").then(res=>{
         setUsername(res.data.username);
-        console.log(res)
     }).catch(err=>{
         console.log(err)
     })
@@ -78,7 +77,7 @@ function App() {
       }):null}
       <NavBar username={username} mode={"loggedin"} />
       <Routes>
-        <Route path='/paevik' element={<Paevik/>} />
+        <Route path='/paevik/:id' element={<Paevik/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/development/testing' element={<AllFunc alerts={alerts} makeAlert={makeAlert}   />} />
       </Routes>
@@ -96,7 +95,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/paevik' element={<Paevik/>} />
+          <Route path='/paevik/:id' element={<Paevik/>} />
         </Routes>
       </div>
     );

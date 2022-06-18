@@ -7,10 +7,10 @@ const cookieSession = require("cookie-session");
 const app = express();
 const db = require("./models");
 const Role = db.roles;
-db.sequelize.sync({ force: true }).then(() => {
+/*db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
   initial();
-});
+});*/
 
 app.use(helmet());
 

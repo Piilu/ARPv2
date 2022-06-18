@@ -22,7 +22,6 @@ function Home(props) {
             if(res.status==200){
                 setAllObjects(res.data);
                 console.log(res.data)
-                
             }
             else{
                 alert("Midagi läks viltu")
@@ -35,7 +34,6 @@ function Home(props) {
     useEffect(() => {
         getAllObjektid();
     },[allObjects.length]);
-
     return (
         <Container>
             <Row style={{ textAlign: "right" }}>

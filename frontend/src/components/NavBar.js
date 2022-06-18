@@ -29,7 +29,7 @@ function NavBar(props) {
                         <Nav >
                             <Nav.Link href="/">Login</Nav.Link>
                             <Nav.Link href="/register">Register</Nav.Link>
-                            <Nav.Link href="/paevik">Päevik</Nav.Link>
+                            <Nav.Link href="/paevik/1">Päevik</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

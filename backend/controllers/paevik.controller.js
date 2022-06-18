@@ -36,6 +36,17 @@ exports.findAll = (req, res) => {
         })
     })
 }
+exports.findAllByObjectID = (req, res) => {
+    const id = req.params.ObjectID
+    Paevik.findAll({where:{ObjektID:id}}).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while finding the Paevik"
+        })
+    })
+}
 exports.findOne = (req, res) => {
     const id = req.params.id
     Paevik.findByPk(id).then(data => {

@@ -54,8 +54,8 @@ function ObjectModal(props) {
 
                     <Col>
                         <div className='qr-box'>
-                            <QRCode size={70} value={"test"}/>
-                            <Row><a className='link-size' href='#'>{window.location.href+"/paevik/"+""}{item.id}</a></Row>
+                            <QRCode size={70} value={`${window.location.href}paevik/${item.id}`}/>
+                            <Row><a className='link-size' href={`${window.location.href}paevik/${item.id}`}>{`${window.location.href}paevik/${item.id}`}</a></Row>
                         </div>
                     </Col>
                 </Row>
